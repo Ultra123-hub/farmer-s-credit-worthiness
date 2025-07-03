@@ -2,7 +2,7 @@
 
 ![Farmer](farmer.png)
 
-This project is a **Streamlit-powered machine learning web app** designed to help identify farmers who are most likely to benefit from agricultural support programs. By leveraging user-provided features such as farm size, access to irrigation, income, and years of experience, the app predicts the likelihood that a farmer qualifies for support.
+This project is a **Streamlit-powered machine learning web app** designed to help identify farmers who are most likely to benefit from agricultural support programs -- specifically an agro-credit. By leveraging user-provided features such as farm size, access to irrigation, income, and years of experience, the app predicts the likelihood that a farmer qualifies for support. This app is a go-to for investors who aim to rely on data rather than guesswork in choosing beneficiaries.
 
 ---
 

@@ -21,9 +21,9 @@ update-branch:
 	git push --force origin HEAD:update
 
 hf-login:
-	git fetch origin update 2>/dev/null || echo "update branch not found"
-	git checkout update 2>/dev/null || git checkout -b update
 	pip install -U "huggingface_hub[cli]"
+	git pull origin update
+	git switch update
 	huggingface-cli login --token $(HF)
 
 push-hub:
@@ -32,3 +32,5 @@ push-hub:
 		--commit-message="Sync latest model and app"
 
 deploy: hf-login push-hub
+
+all: install format train eval update-branch deploy

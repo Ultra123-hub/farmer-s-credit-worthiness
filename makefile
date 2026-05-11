@@ -21,15 +21,17 @@ update-branch:
 	git push --force origin HEAD:update
 
 hf-login:
-	pip install -U "huggingface_hub[cli]"
 	git pull origin update
 	git switch update
+	pip install -U "huggingface_hub[cli]"
+    huggingface-cli login --token $(HF) --add-to-git-credential
 
 push-hub:
-	huggingface-cli upload Ultra123-hub/farmer-credit-worthiness . \
-		--repo-type=space \
-		--commit-message="Sync latest model and app"
+	huggingface-cli upload Uthman89/farmers_credit ./apps.py /apps.py --repo-type=space --commit-message="Sync App file"
+	huggingface-cli upload Uthman89/farmers_credit ./farmer.png /farmer.png --repo-type=space --commit-message="Sync App assets"
+	huggingface-cli upload Uthman89/farmers_credit ./Model /Model --repo-type=space --commit-message="Sync Model"
+	huggingface-cli upload Uthman89/farmers_credit ./Results /Results --repo-type=space --commit-message="Sync Results"
+	huggingface-cli upload Uthman89/farmers_credit ./feature_names.pkl /feature_names.pkl --repo-type=space --commit-message="Sync feature names"
 
 deploy: hf-login push-hub
-
 all: install format train eval update-branch deploy

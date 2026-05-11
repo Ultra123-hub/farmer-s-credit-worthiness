@@ -22,16 +22,17 @@ update-branch:
 
 hf-login:
 	pip install -U "huggingface_hub[cli]"
-	git fetch origin update
-	git checkout update
 	hf auth login --token $(HF)
+
+fetch-model:
+	git fetch origin update
+	git checkout origin/update -- Model/ Results/ feature_names.pkl
 
 push-hub:
 	hf upload Uthman89/farmers_credit ./apps.py /apps.py --repo-type=space --commit-message="Sync App file"
 	hf upload Uthman89/farmers_credit ./farmer.png /farmer.png --repo-type=space --commit-message="Sync App assets"
+	hf upload Uthman89/farmers_credit ./feature_names.pkl /feature_names.pkl --repo-type=space --commit-message="Sync feature names"
 	hf upload Uthman89/farmers_credit ./Model /Model --repo-type=space --commit-message="Sync Model"
 	hf upload Uthman89/farmers_credit ./Results /Results --repo-type=space --commit-message="Sync Results"
-	hf upload Uthman89/farmers_credit ./feature_names.pkl /feature_names.pkl --repo-type=space --commit-message="Sync feature names"
 
-deploy: hf-login push-hub
-all: install format train eval update-branch deploy
+deploy: hf-login fetch-model push-hub

@@ -56,7 +56,8 @@ joblib.dump(X_train.columns.tolist(), "feature_names.pkl")
 # ── 6. Train ───────────────────────────────────────────────────
 model = XGBClassifier(n_estimators=100, random_state=42, eval_metric='logloss')
 model.fit(X_train, y_train)
-model.save_model("farmer_optimized_xgb.json")
+os.makedirs("Model", exist_ok=True)
+joblib.dump(model, "Model/model.pkl")
 
 # ── 7. Evaluate ────────────────────────────────────────────────
 preds = model.predict(X_test)

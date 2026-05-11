@@ -4,9 +4,9 @@ import numpy as np
 import xgboost as xgb
 import joblib
 
+
 # Load model and feature names
-model = xgb.XGBClassifier()
-model.load_model("farmer_optimized_xgb.json")
+model = joblib.load("Model/model.pkl")
 model_feature_names = joblib.load("feature_names.pkl")
 
 def predict_creditworthiness(

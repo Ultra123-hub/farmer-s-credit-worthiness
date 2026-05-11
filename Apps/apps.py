@@ -47,22 +47,14 @@ def predict_creditworthiness(
     input_data['age_squared']          = input_data['age'] ** 2
     input_data['experience_cubed']     = input_data['years_of_experience'] ** 3
 
-    # Align columns with training
-    categorical_cols  = ['education_level', 'marital_status', 'farm_type',
-                         'access_to_extension_services', 'previous_loan_history', 'group_membership']
-    non_encoded_cols  = [col for col in input_data.columns if col not in categorical_cols]
-    encoded_part      = pd.get_dummies(input_data[categorical_cols], drop_first=True)
-    temp_input        = pd.concat([input_data[non_encoded_cols], encoded_part], axis=1)
-
+    # Align columns exactly with training — no get_dummies needed
     encoded_input = pd.DataFrame(index=input_data.index)
     for col in model_feature_names:
-        encoded_input[col] = temp_input[col] if col in temp_input.columns else 0
+        encoded_input[col] = input_data[col] if col in input_data.columns else 0
 
-    encoded_input.drop(columns=['farmer_id'], errors='ignore', inplace=True)
-
-    prediction    = model.predict(encoded_input)[0]
-    probability   = model.predict_proba(encoded_input)[0]
-    confidence    = round(float(max(probability)) * 100, 2)
+    prediction  = model.predict(encoded_input)[0]
+    probability = model.predict_proba(encoded_input)[0]
+    confidence  = round(float(max(probability)) * 100, 2)
 
     if prediction == 1:
         return (

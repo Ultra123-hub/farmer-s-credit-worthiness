@@ -29,6 +29,7 @@ fetch-model:
 	git checkout origin/update -- Model/ Results/ feature_names.pkl
 
 push-hub:
+	hf upload Uthman89/farmers_credit ./Apps/requirements.txt /requirements.txt --repo-type=space --commit-message="Sync requirements"
 	hf upload Uthman89/farmers_credit ./Apps/apps.py /apps.py --repo-type=space --commit-message="Sync App file"
 	hf upload Uthman89/farmers_credit ./feature_names.pkl /feature_names.pkl --repo-type=space --commit-message="Sync feature names"
 	hf upload Uthman89/farmers_credit ./Model /Model --repo-type=space --commit-message="Sync Model"

@@ -21,10 +21,10 @@ update-branch:
 	git push --force origin HEAD:update
 
 hf-login:
-	git pull origin update
-	git switch update
 	pip install -U "huggingface_hub[cli]"
-    huggingface-cli login --token $(HF) --add-to-git-credential
+	git fetch origin update
+	git checkout update
+	huggingface-cli login --token $(HF) --add-to-git-credential
 
 push-hub:
 	huggingface-cli upload Uthman89/farmers_credit ./apps.py /apps.py --repo-type=space --commit-message="Sync App file"

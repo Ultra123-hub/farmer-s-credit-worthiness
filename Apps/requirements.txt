@@ -1,7 +1,9 @@
 gradio
-streamlit
-pandas
 xgboost
 scikit-learn
-joblib
+pandas
 numpy
+joblib
+Pillow
+matplotlib
+seaborn

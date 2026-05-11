@@ -16,7 +16,7 @@ eval:
 update-branch:
 	git config --global user.name $(USER_NAME)
 	git config --global user.email $(USER_EMAIL)
-	git add Results/ farmer_optimized_xgb.json feature_names.pkl
+	git add Results/ Model/model.pkl feature_names.pkl
 	git commit -m "Update model and results [skip ci]"
 	git push --force origin HEAD:update
 
